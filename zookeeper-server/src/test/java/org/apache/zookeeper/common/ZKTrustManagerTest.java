@@ -18,6 +18,7 @@
 
 package org.apache.zookeeper.common;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -146,7 +147,7 @@ public class ZKTrustManagerTest extends ZKTestCase {
         ZKTrustManager zkTrustManager = new ZKTrustManager(mockX509ExtendedTrustManager, false, false);
 
         X509Certificate[] certificateChain = createSelfSignedCertifcateChain(IP_ADDRESS, HOSTNAME);
-        zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket);
+        assertDoesNotThrow(() -> zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket));
 
         verify(mockInetAddress, times(0)).getHostAddress();
         verify(mockInetAddress, times(0)).getHostName();
@@ -159,7 +160,7 @@ public class ZKTrustManagerTest extends ZKTestCase {
         ZKTrustManager zkTrustManager = new ZKTrustManager(mockX509ExtendedTrustManager, false, true);
 
         X509Certificate[] certificateChain = createSelfSignedCertifcateChain(IP_ADDRESS, HOSTNAME);
-        zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket);
+        assertDoesNotThrow(() -> zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket));
 
         verify(mockInetAddress, times(0)).getHostAddress();
         verify(mockInetAddress, times(0)).getHostName();
@@ -172,7 +173,7 @@ public class ZKTrustManagerTest extends ZKTestCase {
         ZKTrustManager zkTrustManager = new ZKTrustManager(mockX509ExtendedTrustManager, true, false);
 
         X509Certificate[] certificateChain = createSelfSignedCertifcateChain(IP_ADDRESS, null);
-        zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket);
+        assertDoesNotThrow(() -> zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket));
 
         verify(mockInetAddress, times(1)).getHostAddress();
         verify(mockInetAddress, times(0)).getHostName();
@@ -185,7 +186,7 @@ public class ZKTrustManagerTest extends ZKTestCase {
         ZKTrustManager zkTrustManager = new ZKTrustManager(mockX509ExtendedTrustManager, true, false);
 
         X509Certificate[] certificateChain = createSelfSignedCertifcateChain(null, HOSTNAME);
-        zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket);
+        assertDoesNotThrow(() -> zkTrustManager.checkServerTrusted(certificateChain, null, mockSocket));
 
         verify(mockInetAddress, times(1)).getHostAddress();
         verify(mockInetAddress, times(1)).getHostName();
@@ -198,7 +199,7 @@ public class ZKTrustManagerTest extends ZKTestCase {
         ZKTrustManager zkTrustManager = new ZKTrustManager(mockX509ExtendedTrustManager, false, true);
 
         X509Certificate[] certificateChain = createSelfSignedCertifcateChain(null, HOSTNAME);
-        zkTrustManager.checkClientTrusted(certificateChain, null, mockSocket);
+        assertDoesNotThrow(() -> zkTrustManager.checkClientTrusted(certificateChain, null, mockSocket));
 
         verify(mockInetAddress, times(1)).getHostAddress();
         verify(mockInetAddress, times(1)).getHostName();
